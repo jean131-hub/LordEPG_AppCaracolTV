@@ -2,6 +2,14 @@
 // HD event_seq=100 al 999
 // HD2 event_seq=1000 al 9999
 
+/*-----------------------Things to do------------------
+    -Colocar valores nibbles lista multiple
+    -Remover formato fecha antes de generar XML
+    -Crear Boton Limpiar formulario, generar EPG
+    -
+*/
+
+
 /*-----------------------Mejoras LordEPG v1.0------------------
     -Añade 5 horas al reloj
     -
@@ -27,6 +35,9 @@ const eventoWrap = document.querySelector('#eventos');
 
 //Eventos sobre el DOM
 cargarEventListeners();
+
+//Editar
+let editar = false;
 
 //Objeto Eventos EPG
 eventoObj = {
@@ -173,6 +184,10 @@ class Eventos {
         this.eventos = this.eventos.filter((evento) => idEvento !== evento.id);
     };
 
+    editarEvento(eventoEditado) {
+        this.eventos = this.eventos.map((evento) => evento.id === eventoEditado.id ? eventoEditado : evento);
+    };
+
 };
 
 
@@ -191,8 +206,8 @@ function cargarEventListeners() {
         //Carga Nibble2
         eventoObj['nibble2'] = inputSelect.selectedOptions[0].getAttribute("data-value2");
     });
-    inputFechaI.addEventListener('change', removerFormato);
-    inputFechaO.addEventListener('change', removerFormato);
+    inputFechaI.addEventListener('change', cargarDatos);
+    inputFechaO.addEventListener('change', cargarDatos);
     inputHoraI.addEventListener('change', ajustarHora);
     inputHoraO.addEventListener('change', ajustarHora);
 
@@ -240,7 +255,6 @@ function removerFormato(e) {
 
     return fecha;
 };
-
 
 function ajustarHora(e) {
 
@@ -292,11 +306,21 @@ function validarFormulario(e) {
         return;
     };
 
-    //Asignamos ID al evento
-    eventoObj.id = Date.now();
+    if (editar) {
+        adminEventos.editarEvento(eventoObj);
+        console.log(eventoObj);
+        ui.imprimirAlerta('Cambios Guardados', 'success');
+        formulario.querySelector('button[type="submit"]').textContent = 'Crear Evento';
+        editar = false;
+    } else {
+        //Asignamos ID al evento
+        eventoObj.id = Date.now();
 
-    adminEventos.agregarEvento(eventoObj);
-    ui.imprimirAlerta('Nuevo evento creado', 'success');
+        adminEventos.agregarEvento(eventoObj);
+        ui.imprimirAlerta('Nuevo evento creado', 'success');
+
+    };
+
     ui.mostrarHtml(adminEventos);
     limpiarObj();
     formulario.reset();
@@ -319,10 +343,13 @@ function limpiarObj() {
 
 function editarEvento(eventoEditar) {
 
+    editar = true;
+
     const { evento, sinopsis, nibble1, nibble2, fecha_in, fecha_out, tiempo_in, tiempo_out, id } = eventoEditar;
     //Cargar Datos Objeto
     inputEvento.value = evento;
     inputSinopsis.value = sinopsis;
+    inputTipoPgm.value = nibble1;
     inputFechaI.value = fecha_in;
     inputFechaO.value = fecha_out;
     inputHoraI.value = tiempo_in;
@@ -337,6 +364,7 @@ function editarEvento(eventoEditar) {
     eventoObj.fecha_out = fecha_out;
     eventoObj.tiempo_in = tiempo_in;
     eventoObj.tiempo_out = tiempo_out;
+    eventoObj.id = id;
 
     formulario.querySelector('button[type="submit"]').textContent = 'Guardar Cambios';
 };
