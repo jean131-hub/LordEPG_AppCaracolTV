@@ -1,0 +1,209 @@
+/*Fuentes*/
+@font-face {
+    font-family: "TrebuchetMS";
+    src: url('fonts/TrebuchetMS.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "BebasNeue";
+    src: url('fonts/BebasNeue.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "webSymbolsRegular";
+    src: url('fonts/websymbols-regular-webfont.eot');
+    src: url('fonts/websymbols-regular-webfont.eot?#iefix') format('embedded-opentype'),
+        url('fonts/websymbols-regular-webfont.svg') format('svg'),
+        url('fonts/websymbols-regular-webfont.ttf') format('truetype'),
+        url('fonts/websymbols-regular-webfont.woff#webSymbolsRegular') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/*Colores
+    azul: #00198b
+*/
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    background: url(../img/pattern.png);
+}
+
+#header {
+    width: 100% !important;
+    height: 70px;
+    background: #222;
+}
+
+.wrap {
+    width: 70%;
+    margin: 0px auto;
+    line-height: 70px;
+    color: white;
+    overflow: hidden;
+}
+
+#logo {
+    font-family: "BebasNeue";
+    font-size: 30px;
+    width: 200px;
+    margin: 0px auto;
+    margin-top: 9px;
+    float: left;
+    height: 50px;
+    line-height: 50px;
+    letter-spacing: 1px;
+    background-color: #00198b;
+}
+
+#logo h3 {
+    line-height: 50px;
+}
+
+#menu {
+    float: right;
+
+}
+
+#menu ul {
+    list-style: none;
+}
+
+#menu ul li {
+    font-family: "BebasNeue";
+    font-size: 25px;
+    letter-spacing: 1px;
+    margin-right: 20px;
+    float: left;
+}
+
+#menu ul li a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    transition: all 500ms;
+}
+
+
+#menu ul li a:hover {
+    transform: scale(1.2, 1.2);
+    color: #ccc;
+}
+
+a:visited {
+    color: white;
+}
+
+#gear {
+    font-family: "webSymbolsRegular";
+    float: left;
+    margin-left: 25px;
+    margin-right: 20px;
+    /*Animacion del Gear*/
+    animation-name: rotate-gear;
+    animation-iteration-count: infinite;
+    animation-duration: 2s;
+    animation-timing-function: linear;
+}
+
+@keyframes rotate-gear {
+    from {
+        transform: rotateZ(0deg);
+    }
+
+    to {
+        transform: rotateZ(360deg);
+    }
+}
+
+
+.btn-caracol {
+    background: #00198b !important;
+    color: white !important;
+    text-transform: uppercase;
+    font-family: "BebasNeue";
+    font-size: 20px !important;
+    letter-spacing: 1px;
+    transition: all 500ms;
+}
+
+.content {
+    margin: 0px auto !important;
+}
+
+.btn-caracol:hover {
+    background: #ccc !important;
+    color: black !important;
+
+}
+
+#footer {
+    background: #222 !important;
+}
+
+.menufooter {
+    text-transform: uppercase;
+    font-family: "BebasNeue";
+    font-size: 20px !important;
+    margin: 0px auto;
+    letter-spacing: 1px;
+    color: white;
+}
+
+.menufooter h2 {
+    background: url(../img/pxgray.png), white;
+    color: black;
+    width: 300px;
+    height: 55px;
+    text-align: center;
+    line-height: 55px;
+}
+
+
+.menufooter ul a {
+    font-size: 25px;
+    text-decoration: none;
+    border-bottom: #ccc;
+    color: white;
+}
+
+.menufooter ul li {
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
+}
+
+.autor p {
+    font-family: "Arial" !important;
+    text-transform: none;
+    font-size: 15px !important;
+}
+
+.alerta {
+    font-weight: bold;
+    margin: 0px auto;
+    transition: opacity 300ms;
+}
+
+.ocultar {
+    opacity: 0;
+}
+
+.lista-eventos .evento{
+    border-bottom: 1px solid #e1e1e1;
+    padding: 3rem;
+}
+
+.lista-eventos .evento p{
+    margin:0px;
+}
+
+svg {
+    width: 20px;
+}
