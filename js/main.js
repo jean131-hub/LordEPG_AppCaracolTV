@@ -137,6 +137,7 @@ class UI {
           </svg>`;
             btnEliminar.onclick = (e) => {
                 adminEventos.eliminarEvento(id);
+                validarBtnEpg();
                 ui.mostrarHtml(adminEventos);
                 ui.imprimirAlerta(`Se ha eliminado evento: ${evento}`, 'success');
             };
@@ -161,7 +162,6 @@ class UI {
     limpiarHtml() {
 
         while (eventoWrap.contains(eventoWrap.firstChild)) {
-            console.log(eventoWrap.firstChild)
             eventoWrap.removeChild(eventoWrap.firstChild);
         };
     };
@@ -173,7 +173,7 @@ class Eventos {
     constructor() {
 
         this.eventos = [];
-
+    
     };
 
     agregarEvento(nuevoEvento) {
@@ -212,6 +212,7 @@ function cargarEventListeners() {
     inputHoraO.addEventListener('change', ajustarHora);
 
     formulario.addEventListener('submit', validarFormulario);
+
 };
 
 function cargarDatos(e) {
@@ -308,7 +309,6 @@ function validarFormulario(e) {
 
     if (editar) {
         adminEventos.editarEvento(eventoObj);
-        console.log(eventoObj);
         ui.imprimirAlerta('Cambios Guardados', 'success');
         formulario.querySelector('button[type="submit"]').textContent = 'Crear Evento';
         editar = false;
@@ -322,6 +322,7 @@ function validarFormulario(e) {
     };
 
     ui.mostrarHtml(adminEventos);
+    validarBtnEpg();
     limpiarObj();
     formulario.reset();
 };
@@ -367,4 +368,12 @@ function editarEvento(eventoEditar) {
     eventoObj.id = id;
 
     formulario.querySelector('button[type="submit"]').textContent = 'Guardar Cambios';
+};
+
+function validarBtnEpg(){
+    if(adminEventos.eventos.length > 0){
+        document.querySelector('.btn-epg').disabled = false;
+    }else{
+        document.querySelector('.btn-epg').disabled = true; 
+    }; 
 };
